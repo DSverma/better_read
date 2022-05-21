@@ -1,6 +1,7 @@
 package io.javabrains.betterreads.userbooks;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.*;
 
@@ -28,6 +29,13 @@ public class UserBooks {
     @Column("rating")
     @CassandraType(type = CassandraType.Name.INT)
     private int rating;
+
+    @Column("book_name")
+    @CassandraType(type = CassandraType.Name.TEXT)
+    private String bookName;
+
+    @Transient
+    private String coverUrl;
 
     public LocalDate getStartedDate() {
         return startedDate;
@@ -67,5 +75,21 @@ public class UserBooks {
 
     public void setKey(UserBooksPrimaryKey key) {
         this.key = key;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
     }
 }
